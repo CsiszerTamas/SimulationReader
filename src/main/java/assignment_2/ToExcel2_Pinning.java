@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToExcel2 {
+public class ToExcel2_Pinning {
 
     private static String[] columns = {"Time", "AV100", "AV300", "AV500", "AV700"};
     private static List<Value2> values100 = new ArrayList<>();
@@ -159,7 +159,7 @@ public class ToExcel2 {
             cell.setCellStyle(workbook.createCellStyle());
         }
 
-        // Create Other rows and cells with Value data
+        // Create Other rows and cells with assignment_3.Value data
         int rowNum = 1;
         int time = 0;
         for (int i = 0; i < values100.size(); i++) {

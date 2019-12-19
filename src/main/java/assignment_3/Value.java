@@ -1,3 +1,5 @@
+package assignment_3;
+
 public class Value {
 
     private double T;

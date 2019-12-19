@@ -1,3 +1,5 @@
+package assignment_3;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -20,7 +22,7 @@ public class ExcelWriter {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(
-                    "10x10.txt"));
+                    "A350x50.txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] arr = line.split(" ");
@@ -75,7 +77,7 @@ public class ExcelWriter {
             cell.setCellStyle(workbook.createCellStyle());
         }
 
-        // Create Other rows and cells with Value data
+        // Create Other rows and cells with assignment_3.Value data
         int rowNum = 1;
         for (Value value : values) {
             Row row = sheet.createRow(rowNum++);
@@ -93,7 +95,7 @@ public class ExcelWriter {
         }
 
         // Write the output to a file
-        FileOutputStream fileOut = new FileOutputStream("result.xlsx");
+        FileOutputStream fileOut = new FileOutputStream("result50.xlsx");
         workbook.write(fileOut);
         fileOut.close();
 
