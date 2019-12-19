@@ -13,8 +13,9 @@ import java.util.List;
 
 public class ExcelWriter {
 
-    private static String[] columns = {"T", "|M|", "Do not need this", "chi", "cv"};
+    private static String[] columns = {"T", "|M|", "E", "chi", "cv"};
     private static List<Value> values = new ArrayList<>();
+    private static int CONST = 10;
 
 
     // Initializing  data to insert into the excel file
@@ -22,7 +23,7 @@ public class ExcelWriter {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(
-                    "A350x50.txt"));
+                    "A3_" + CONST + "x" + CONST + ".txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] arr = line.split(" ");
@@ -95,11 +96,13 @@ public class ExcelWriter {
         }
 
         // Write the output to a file
-        FileOutputStream fileOut = new FileOutputStream("result50.xlsx");
+        FileOutputStream fileOut = new FileOutputStream("Assignment3/RESULT.xlsx");
         workbook.write(fileOut);
         fileOut.close();
 
         // Closing the workbook
         workbook.close();
+
+        System.out.println("Excel file created");
     }
 }
