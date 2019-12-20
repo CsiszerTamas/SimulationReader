@@ -1,6 +1,5 @@
 package assignment_3;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -14,16 +13,46 @@ import java.util.List;
 public class ExcelWriter {
 
     private static String[] columns = {"T", "|M|", "E", "chi", "cv"};
-    private static List<Value> values = new ArrayList<>();
-    private static int CONST = 10;
-
+    private static List<Value> values10 = new ArrayList<>();
+    private static List<Value> values20 = new ArrayList<>();
+    private static List<Value> values30 = new ArrayList<>();
+    private static List<Value> values40 = new ArrayList<>();
+    private static List<Value> values50 = new ArrayList<>();
 
     // Initializing  data to insert into the excel file
     static {
+
+    }
+
+    public static void main(String[] args) {
+
+        // Read the data from the txt files
+        readDataFromTxt(values10, 10);
+//        readDataFromTxt(values20, 20);
+//        readDataFromTxt(values30, 30);
+//        readDataFromTxt(values40, 40);
+//        readDataFromTxt(values50, 50);
+
+        // Write the data to an excel
+        try {
+            processData(values10, 10);
+//            processData(values20,20);
+//            processData(values30,30);
+//            processData(values40,40);
+//            processData(values50,50);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    private static void readDataFromTxt(List<Value> list, int number) {
         BufferedReader reader;
         try {
             reader = new BufferedReader(new FileReader(
-                    "A3_" + CONST + "x" + CONST + ".txt"));
+                    "A3_" + number + "x" + number + ".txt"));
             String line = reader.readLine();
             while (line != null) {
                 String[] arr = line.split(" ");
@@ -33,9 +62,9 @@ public class ExcelWriter {
                     array[i] = Double.parseDouble(arr[i]);
                 }
 
-                Value value = new Value(array[0], array[1], 0.0, array[3], array[4]);
+                Value value = new Value(array[0], array[1], array[2], array[3], array[4]);
 
-                values.add(value);
+                list.add(value);
 
                 // read next line
                 line = reader.readLine();
@@ -46,7 +75,7 @@ public class ExcelWriter {
         }
     }
 
-    public static void main(String[] args) throws IOException, InvalidFormatException {
+    private static void processData(List<Value> valueList, int number) throws IOException {
         // Create a Workbook
         Workbook workbook = new XSSFWorkbook(); // new HSSFWorkbook() for generating `.xls` file
 
@@ -80,12 +109,12 @@ public class ExcelWriter {
 
         // Create Other rows and cells with assignment_3.Value data
         int rowNum = 1;
-        for (Value value : values) {
+        for (Value value : valueList) {
             Row row = sheet.createRow(rowNum++);
 
             row.createCell(0).setCellValue(value.getT());
             row.createCell(1).setCellValue(value.getM());
-            row.createCell(2).setCellValue(value.getMM_not_needed());
+            row.createCell(2).setCellValue(value.getE());
             row.createCell(3).setCellValue(value.getChi());
             row.createCell(4).setCellValue(value.getCv());
         }
@@ -96,13 +125,13 @@ public class ExcelWriter {
         }
 
         // Write the output to a file
-        FileOutputStream fileOut = new FileOutputStream("Assignment3/RESULT.xlsx");
+        FileOutputStream fileOut = new FileOutputStream("Assignment3/Result_Total.xlsx");
         workbook.write(fileOut);
         fileOut.close();
 
         // Closing the workbook
         workbook.close();
 
-        System.out.println("Excel file created");
+        System.out.println("Excel file with CONT = " + number + " created");
     }
 }

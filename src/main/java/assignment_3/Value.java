@@ -4,15 +4,15 @@ public class Value {
 
     private double T;
     private double M;
-    private double MM_not_needed;
+    private double E;
     private double M2;
     private double chi;
     private double cv;
 
-    public Value(double t, double m, double MM_not_needed, double chi, double cv) {
+    public Value(double t, double m, double E, double chi, double cv) {
         this.T = t;
         this.M = m;
-        this.MM_not_needed = MM_not_needed;
+        this.E = E;
         this.chi = chi;
         this.cv = cv;
     }
@@ -33,12 +33,12 @@ public class Value {
         M = m;
     }
 
-    public double getMM_not_needed() {
-        return MM_not_needed;
+    public double getE() {
+        return E;
     }
 
-    public void setMM_not_needed(double MM_not_needed) {
-        this.MM_not_needed = MM_not_needed;
+    public void setE(double e) {
+        this.E = e;
     }
 
     public double getM2() {
